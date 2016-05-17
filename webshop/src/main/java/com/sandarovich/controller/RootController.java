@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class IndexController {
+public class RootController {
 
     private static final String PAGE_INDEX = "index";
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showIndexPage() {
+    public String showApplicationRootPage() {
         return PAGE_INDEX;
     }
 }

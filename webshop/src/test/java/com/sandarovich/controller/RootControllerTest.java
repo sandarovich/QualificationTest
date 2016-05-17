@@ -8,14 +8,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 public class RootControllerTest {
 
     @InjectMocks
-    private IndexController controller;
+    private RootController controller;
 
     private MockMvc mockMvc;
 
@@ -26,8 +25,8 @@ public class RootControllerTest {
     }
 
     @Test
-    public void testIndexControllerMapping() throws Exception {
-        mockMvc.perform(get("/")).andDo(print())
+    public void testApplicationRootUrl() throws Exception {
+        mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
                 .andExpect(forwardedUrl("index"));
