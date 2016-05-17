@@ -2,7 +2,7 @@
 <jsp:include page="header.jsp" />
         <div class="container">
             <div class="page-header">
-                <h2>WebShop<small> "Larek-Marek"</small></h2>
+                <h2>WebShop<small> "Larek-Marek :)"</small></h2>
             </div>
         </div>
 <jsp:include page="footer.jsp" />
