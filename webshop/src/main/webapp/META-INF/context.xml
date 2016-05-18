@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiResourceLocking="true">
+    <Resource name="jdbc/shopDb"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="master"
+              password="vfcnthjr"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://shopdb.c6tpu7dauy4w.us-west-2.rds.amazonaws.com:5432/shopDb?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
+              validationQuery="select 1"
+              maxTotal="10"
+              minIdle="7"
+              maxIdle="10"/>
+</Context>
