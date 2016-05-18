@@ -35,6 +35,14 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <bean id="fileValidator" class="com.sandarovich.fileupload.validaton.FileValidator"/>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="validation"/>
+    </bean>
+
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:annotation-driven/>
     <tx:annotation-driven transaction-manager="transactionManager"/>

@@ -22,12 +22,13 @@
 </pre>
                 </div>
                 <div class="panel-body">
-                    <form:form action="upload" method="post" commandName="">
+                    <form:form method="POST" commandName="file"  enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="file">Please specify file path:</label>
-                            <input name="file"  type="file">
+                            <input name="file"  type="file" accept="application/json">
+                            <form:errors path="file" cssStyle="color: #ff0000;" />
                         </div>
-                        <button type="submit" value="addPurchase" class="btn btn-default">Upload</button>
+                        <button type="submit" value="upload" class="btn btn-info">Upload</button>
                     </form:form>
                 </div>
             </div>
