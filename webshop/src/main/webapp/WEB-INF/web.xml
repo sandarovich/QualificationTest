@@ -21,7 +21,6 @@
         </servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <!-- O.K We taking it from applicationContext -->
             <param-value>/WEB-INF/applicationContext.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
@@ -43,5 +42,9 @@
     <error-page>
         <error-code>500</error-code>
         <location>/WEB-INF/jsp/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/WEB-INF/jsp/405.jsp</location>
     </error-page>
 </web-app>

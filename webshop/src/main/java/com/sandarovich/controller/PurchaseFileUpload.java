@@ -4,15 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.Map;
-
 @Controller
-public class RootController {
+@RequestMapping(value = "/purchase")
 
-    private static final String PAGE_INDEX = "index";
+public class PurchaseFileUpload {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showApplicationRootPage(Map<String, Object> model) {
-        return PAGE_INDEX;
+    public String showPurchaseAddForm() {
+        return "purchase";
     }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public String uploadFile() {
+        return "";
+    }
+
+
 }

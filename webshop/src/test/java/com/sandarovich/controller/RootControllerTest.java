@@ -1,6 +1,7 @@
 package com.sandarovich.controller;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
@@ -24,6 +25,7 @@ public class RootControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
+    @Ignore
     @Test
     public void testApplicationRootUrl() throws Exception {
         mockMvc.perform(get("/"))

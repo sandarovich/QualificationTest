@@ -16,6 +16,7 @@
 
         <tomcat.deploy.username>tomcat</tomcat.deploy.username>
         <tomcat.deploy.password>tomcat</tomcat.deploy.password>
+
         <sonar-maven-plugin.version>2.7.1</sonar-maven-plugin.version>
 
         <junit.version>4.12</junit.version>
@@ -96,6 +97,11 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>${javax.servlet-api.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1201-jdbc41</version>
         </dependency>
     </dependencies>
 
