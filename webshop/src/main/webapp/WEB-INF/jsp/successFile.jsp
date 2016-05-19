@@ -8,7 +8,7 @@
                 <li><a href="<c:url value="/" />">Home</a></li>
             </ol>
             <div class="container">
-                <h3>File name: ${fileName}</h3>
+                <h3>File content: ${fileName}</h3>
             </div>
         </div>
 <jsp:include page="footer.jsp" />
