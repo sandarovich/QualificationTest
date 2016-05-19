@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.sandarovich.model.PurchaseData;
 import com.sandarovich.service.UploadService;
 import org.apache.commons.io.IOUtils;
-import org.springframework.http.MediaType;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,21 +19,10 @@ public class PurchaseUploadService implements UploadService {
 
     private static final String ENCODING = "UTF-8";
     private static final String ROOT_JSON_KEY = "data";
+
+    private static final Logger logger = Logger.getLogger(PurchaseUploadService.class);
+
     private MultipartFile file;
-
-//    @Autowired
-//    PurchaseDao purchaseDao;
-//
-//    @Autowired
-//    ProductDao productDao;
-
-
-    @Override
-    public boolean isFileUploaded() {
-
-        return MediaType.APPLICATION_JSON.equals(MediaType.valueOf(file.getContentType()))
-                && file.getSize() > 0;
-    }
 
     @Override
     public void setFile(MultipartFile file) {
@@ -45,13 +34,14 @@ public class PurchaseUploadService implements UploadService {
         return parseFile();
     }
 
-    private String parseFile() throws ParseFileException {
+    public String parseFile() throws ParseFileException {
         String fileAsString;
         ByteArrayInputStream stream;
         try {
             stream = new ByteArrayInputStream(file.getBytes());
             fileAsString = IOUtils.toString(stream, ENCODING);
         } catch (IOException e) {
+            logger.error("Unable to read file", e);
             throw new ParseFileException("Unable to read file" + e.getMessage());
         }
 
@@ -60,7 +50,8 @@ public class PurchaseUploadService implements UploadService {
         try {
             jsonObject = parser.parse(fileAsString).getAsJsonObject();
         } catch (JsonSyntaxException e) {
-            throw new ParseFileException("Possible problems in JSON content in file" + e.getMessage());
+            logger.error("Problems in JSON file. Validate http://jsonlint.com/ first", e);
+            throw new ParseFileException("Problems in JSON file.  Validate http://jsonlint.com/ first");
         }
         JsonArray data = jsonObject.get(ROOT_JSON_KEY).getAsJsonArray();
 

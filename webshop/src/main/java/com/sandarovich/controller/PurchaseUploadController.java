@@ -3,6 +3,8 @@ package com.sandarovich.controller;
 import com.sandarovich.fileupload.model.File;
 import com.sandarovich.fileupload.validaton.FileValidator;
 import com.sandarovich.service.UploadService;
+import com.sandarovich.service.impl.ParseFileException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/upload")
 
 public class PurchaseUploadController {
+
+    private static final Logger logger = Logger.getLogger(PurchaseUploadController.class);
 
     @Autowired
     FileValidator fileValidator;
@@ -49,7 +53,11 @@ public class PurchaseUploadController {
 
             MultipartFile multipartFile = file.getFile();
             uploadService.setFile(multipartFile);
-            model.addAttribute("fileName", uploadService.saveToBD());
+            try {
+                model.addAttribute("fileName", uploadService.parseFile());
+            } catch (ParseFileException e) {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
         }
 
         return returnVal;
