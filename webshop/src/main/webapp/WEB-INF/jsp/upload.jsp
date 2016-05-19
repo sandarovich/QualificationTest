@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="file">Please specify file path:</label>
                             <input name="file"  type="file" accept="application/json">
-                            <form:errors path="file" cssStyle="color: #ff0000;" />
+                            <form:errors path="file" cssClass="error" />
                         </div>
                         <button type="submit" value="upload" class="btn btn-info">Upload</button>
                     </form:form>

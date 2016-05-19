@@ -9,6 +9,8 @@ public interface ProductDao {
 
     List<Product> getAll();
 
-    void save(Product product);
+    Product save(Product product);
+
+    boolean isExist(String name);
 
 }

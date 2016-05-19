@@ -10,7 +10,7 @@ public class PurchaseItem {
     private long id;
 
     @Column(name = "quantity")
-    private int quantity;
+    private long quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_id")
@@ -28,11 +28,11 @@ public class PurchaseItem {
         this.id = id;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 

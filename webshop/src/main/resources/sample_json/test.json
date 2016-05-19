@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "product": "Icecream",
+      "count": 10,
+      "sum": 1000
+    },
+    {
+      "product": "Robot",
+      "count": 4,
+      "sum": 3600
+    },
+    {
+      "product": "Milk",
+      "count": 1,
+      "sum": 10.59
+    }
+  ]
+} 
+    

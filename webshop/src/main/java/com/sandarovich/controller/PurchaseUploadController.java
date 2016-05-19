@@ -1,9 +1,9 @@
 package com.sandarovich.controller;
 
 import com.sandarovich.fileupload.model.File;
-import com.sandarovich.fileupload.validaton.FileValidator;
+import com.sandarovich.fileupload.validation.FileValidator;
+import com.sandarovich.fileupload.validation.ParseException;
 import com.sandarovich.service.UploadService;
-import com.sandarovich.service.impl.ParseFileException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping(value = "/upload")
@@ -44,24 +43,21 @@ public class PurchaseUploadController {
     @RequestMapping(method = RequestMethod.POST)
     public String uploadFile(Model model, @Validated File file, BindingResult result) {
 
-        String returnVal = "successFile";
-
+        String resultView = "upload";
 
         if (result.hasErrors()) {
-            return returnVal = "upload";
+            return resultView;
         } else {
-
-            MultipartFile multipartFile = file.getFile();
-            uploadService.setFile(multipartFile);
             try {
-                model.addAttribute("fileName", uploadService.parseFile());
-            } catch (ParseFileException e) {
-                model.addAttribute("errorMessage", e.getMessage());
+                uploadService.setFile(file);
+                uploadService.uploadFiletoDB();
+            } catch (ParseException e) {
+                model.addAttribute("file", "Unable to parse JSON");
+                return resultView;
             }
+
+            return "successFile";
         }
-
-        return returnVal;
     }
-
 
 }

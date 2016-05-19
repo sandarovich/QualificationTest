@@ -1,13 +1,11 @@
 package com.sandarovich.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.sandarovich.fileupload.model.File;
+
 
 public interface UploadService {
+    void setFile(File file);
 
-    void setFile(MultipartFile file);
-
-    String parseFile();
-
-    String saveToBD();
+    void uploadFiletoDB();
 
 }
