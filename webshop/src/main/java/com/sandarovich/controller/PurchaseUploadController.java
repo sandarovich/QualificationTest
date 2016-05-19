@@ -1,7 +1,7 @@
 package com.sandarovich.controller;
 
-import com.sandarovich.fileupload.JsonFileValidator;
-import com.sandarovich.fileupload.ParseException;
+import com.sandarovich.jsonfileupload.JsonFileValidator;
+import com.sandarovich.jsonfileupload.ParseException;
 import com.sandarovich.model.JsonFile;
 import com.sandarovich.service.UploadService;
 import org.apache.log4j.Logger;

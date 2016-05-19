@@ -1,4 +1,4 @@
-package com.sandarovich.fileupload;
+package com.sandarovich.jsonfileupload;
 
 
 import com.sandarovich.model.JsonFile;

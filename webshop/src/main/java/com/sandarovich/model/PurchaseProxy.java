@@ -1,13 +1,13 @@
 package com.sandarovich.model;
 
 
-public class PurchaseData {
+public class PurchaseProxy {
 
     private String product;
     private long count;
     private double sum;
 
-    public PurchaseData() {
+    public PurchaseProxy() {
     }
 
     public double getSum() {
