@@ -1,10 +1,10 @@
 package com.sandarovich.service;
 
-import com.sandarovich.fileupload.model.File;
+import com.sandarovich.model.JsonFile;
 
 
 public interface UploadService {
-    void setFile(File file);
+    void setJsonFile(JsonFile jsonFile);
 
     void uploadFiletoDB();
 

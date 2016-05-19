@@ -1,4 +1,4 @@
-package com.sandarovich.fileupload.model;
+package com.sandarovich.model;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -8,20 +8,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public class File {
+public class JsonFile {
     private static final String ENCODING = "UTF-8";
-    private MultipartFile file;
+    private MultipartFile jsonFile;
 
-    public MultipartFile getFile() {
-        return file;
+    public MultipartFile getJsonFile() {
+        return jsonFile;
     }
 
-    public void setFile(MultipartFile file) {
-        this.file = file;
+    public void setJsonFile(MultipartFile jsonFile) {
+        this.jsonFile = jsonFile;
     }
 
     private String asText() throws IOException {
-        return IOUtils.toString(file.getInputStream(), ENCODING);
+        return IOUtils.toString(jsonFile.getInputStream(), ENCODING);
     }
 
     public JsonObject asJsonObject() throws IOException, JsonParseException {

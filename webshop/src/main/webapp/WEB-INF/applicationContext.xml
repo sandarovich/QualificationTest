@@ -36,7 +36,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="fileValidator" class="com.sandarovich.fileupload.validation.FileValidator"/>
+    <bean id="jsonFileValidator" class="com.sandarovich.fileupload.JsonFileValidator"/>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 

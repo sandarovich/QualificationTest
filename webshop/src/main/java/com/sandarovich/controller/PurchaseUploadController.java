@@ -1,8 +1,8 @@
 package com.sandarovich.controller;
 
-import com.sandarovich.fileupload.model.File;
-import com.sandarovich.fileupload.validation.FileValidator;
-import com.sandarovich.fileupload.validation.ParseException;
+import com.sandarovich.fileupload.JsonFileValidator;
+import com.sandarovich.fileupload.ParseException;
+import com.sandarovich.model.JsonFile;
 import com.sandarovich.service.UploadService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,25 +23,25 @@ public class PurchaseUploadController {
     private static final Logger logger = Logger.getLogger(PurchaseUploadController.class);
 
     @Autowired
-    FileValidator fileValidator;
+    private JsonFileValidator jsonFileValidator;
 
     @Autowired
     private UploadService uploadService;
 
     @InitBinder
     private void initBinder(WebDataBinder binder) {
-        binder.setValidator(fileValidator);
+        binder.setValidator(jsonFileValidator);
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String getForm(Model model) {
-        File file = new File();
-        model.addAttribute("file", file);
+        JsonFile jsonFile = new JsonFile();
+        model.addAttribute("jsonFile", jsonFile);
         return "upload";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String uploadFile(Model model, @Validated File file, BindingResult result) {
+    public String uploadFile(Model model, @Validated JsonFile jsonFile, BindingResult result) {
 
         String resultView = "upload";
 
@@ -49,10 +49,10 @@ public class PurchaseUploadController {
             return resultView;
         } else {
             try {
-                uploadService.setFile(file);
+                uploadService.setJsonFile(jsonFile);
                 uploadService.uploadFiletoDB();
             } catch (ParseException e) {
-                model.addAttribute("file", "Unable to parse JSON");
+                model.addAttribute("jsonFile", "Unable to parse JSON");
                 return resultView;
             }
 
