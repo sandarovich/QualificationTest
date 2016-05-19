@@ -20,3 +20,9 @@ footer {
 	font-size: 1.005em;
 	padding-top: 15px;
 }
+
+.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}

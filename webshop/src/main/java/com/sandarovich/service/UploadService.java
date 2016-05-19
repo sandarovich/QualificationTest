@@ -1,13 +1,14 @@
 package com.sandarovich.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.sandarovich.fileupload.model.File;
+import com.sandarovich.fileupload.validation.ParseException;
+
 
 public interface UploadService {
+    void setFile(File file);
 
-    void setFile(MultipartFile file);
+    void parseFile() throws ParseException;
 
-    String parseFile();
-
-    String saveToBD();
+    void uploadFile();
 
 }
