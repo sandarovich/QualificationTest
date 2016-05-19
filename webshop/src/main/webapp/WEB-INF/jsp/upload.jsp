@@ -17,6 +17,10 @@
     &quot;product&quot;: &quot;prod1&quot;,
     &quot;count&quot;: 10,
     &quot;sum&quot;: 1000
+    }, {
+     &quot;product&quot;: &quot;prod2&quot;,
+     &quot;count&quot;: 4,
+     &quot;sum&quot;: 120
     }]
 }
 </pre>
