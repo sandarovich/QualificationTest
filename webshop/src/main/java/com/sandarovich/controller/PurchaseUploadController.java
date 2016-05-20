@@ -1,10 +1,9 @@
 package com.sandarovich.controller;
 
-import com.sandarovich.jsonfileupload.JsonFileValidator;
-import com.sandarovich.jsonfileupload.ParseException;
+import com.sandarovich.fileupload.JsonFileValidator;
+import com.sandarovich.fileupload.ParseException;
 import com.sandarovich.model.JsonFile;
 import com.sandarovich.service.UploadService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public class PurchaseUploadController {
 
-    private static final Logger logger = Logger.getLogger(PurchaseUploadController.class);
+    private static final String UPLOAD_PAGE = "upload";
+    private static final String SUCCESS_UPLOAD_PAGE = "successUpload";
 
     @Autowired
     private JsonFileValidator jsonFileValidator;
@@ -35,29 +35,26 @@ public class PurchaseUploadController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getForm(Model model) {
+
         JsonFile jsonFile = new JsonFile();
         model.addAttribute("jsonFile", jsonFile);
-        return "upload";
+        return UPLOAD_PAGE;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String uploadFile(Model model, @Validated JsonFile jsonFile, BindingResult result) {
 
-        String resultView = "upload";
-
         if (result.hasErrors()) {
-            return resultView;
-        } else {
-            try {
-                uploadService.setJsonFile(jsonFile);
-                uploadService.uploadFiletoDB();
-            } catch (ParseException e) {
-                model.addAttribute("jsonFile", "Unable to parse JSON");
-                return resultView;
-            }
-
-            return "successFile";
+            return UPLOAD_PAGE;
         }
+        try {
+            uploadService.setJsonFile(jsonFile);
+            uploadService.uploadFiletoDB();
+        } catch (ParseException e) {
+            model.addAttribute("jsonFile", "Unable to parse JSON");
+            return UPLOAD_PAGE;
+        }
+        return SUCCESS_UPLOAD_PAGE;
     }
 
 }

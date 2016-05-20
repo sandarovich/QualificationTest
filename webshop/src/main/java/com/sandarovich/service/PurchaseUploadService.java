@@ -7,8 +7,9 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.sandarovich.dao.ProductDao;
 import com.sandarovich.dao.PurchaseDao;
-import com.sandarovich.jsonfileupload.ParseException;
+import com.sandarovich.fileupload.ParseException;
 import com.sandarovich.model.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ import java.util.List;
 
 @Service
 public class PurchaseUploadService implements UploadService {
+
+    private static final Logger logger = Logger.getLogger(PurchaseUploadService.class);
 
     private static final String ROOT_JSON_KEY = "data";
 
@@ -68,6 +71,7 @@ public class PurchaseUploadService implements UploadService {
             }.getType();
             this.purchaseProxy = new Gson().fromJson(data, listType);
         } catch (IOException e) {
+            logger.error("Unable to parse JSON", e);
             throw new ParseException("Unable to parse JSON");
         }
     }

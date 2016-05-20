@@ -7,9 +7,6 @@ public class PurchaseProxy {
     private long count;
     private double sum;
 
-    public PurchaseProxy() {
-    }
-
     public double getSum() {
         return sum;
     }
