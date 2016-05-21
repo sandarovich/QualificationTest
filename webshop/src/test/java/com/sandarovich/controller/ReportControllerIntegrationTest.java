@@ -1,7 +1,6 @@
 package com.sandarovich.controller;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:*applicationContextTest.xml"})
-public class RootControllerIntegrationTest {
+public class ReportControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext context;
@@ -30,13 +29,12 @@ public class RootControllerIntegrationTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
 
-    @Ignore
     @Test
-    public void testApplicationRootUrl() throws Exception {
-        this.mockMvc.perform(get(""))
+    public void testReportRootUrl() throws Exception {
+        this.mockMvc.perform(get("/report"))
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrl("/WEB-INF/jsp/index.jsp"))
-                .andExpect(view().name("index"));
+                .andExpect(forwardedUrl("/WEB-INF/jsp/report.jsp"))
+                .andExpect(view().name("report"));
     }
 
 }

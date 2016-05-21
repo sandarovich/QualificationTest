@@ -3,14 +3,15 @@ package com.sandarovich.fileupload;
 
 import com.google.gson.JsonParseException;
 import com.sandarovich.model.JsonFile;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 public class JsonFileValidator implements Validator {
 
-    private static final Logger logger = Logger.getLogger(JsonFileValidator.class);
+    private static final Logger logger = LoggerFactory.getLogger(JsonFileValidator.class);
 
     private static final String REJECT_MESSAGE_KEY = "jsonFile";
 
