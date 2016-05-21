@@ -1,13 +1,8 @@
 package com.sandarovich.fileupload;
 
-public class ParseException extends RuntimeException {
-    private static final long serialVersionUID = 7364451446089457089L;
+public class ParseException extends Exception {
 
     public ParseException(String message) {
         super(message);
-    }
-
-    public ParseException(Throwable cause) {
-        super(cause);
     }
 }

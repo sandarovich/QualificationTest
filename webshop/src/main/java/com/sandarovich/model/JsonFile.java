@@ -20,11 +20,16 @@ public class JsonFile {
         this.jsonFile = jsonFile;
     }
 
-    private String asText() throws IOException {
-        return IOUtils.toString(jsonFile.getInputStream(), ENCODING);
+    private String asText() {
+        try {
+            return IOUtils.toString(jsonFile.getInputStream(), ENCODING);
+        } catch (IOException e) {
+            return "";
+        }
+
     }
 
-    public JsonObject asJsonObject() throws IOException, JsonParseException {
+    public JsonObject asJsonObject() throws JsonParseException {
         JsonParser parser = new JsonParser();
         return parser.parse(asText()).getAsJsonObject();
 

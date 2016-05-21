@@ -26,13 +26,14 @@
 </pre>
                 </div>
                 <div class="panel-body">
+                    <script src="<c:url value="/js/error_message_hider.js"/>"></script>
                     <form:form method="POST" commandName="jsonFile"  enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="jsonFile">Please specify file path:</label>
                             <input name="jsonFile"  type="file" accept="application/json">
                             <form:errors path="jsonFile" cssClass="error" />
                         </div>
-                        <button type="submit" value="upload" class="btn btn-info">Upload</button>
+                        <button id="upload" type="submit" value="upload" class="btn btn-info">Upload</button>
                     </form:form>
                 </div>
             </div>

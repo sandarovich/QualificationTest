@@ -3,17 +3,14 @@ package com.sandarovich.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.sandarovich.dao.ProductDao;
 import com.sandarovich.dao.PurchaseDao;
-import com.sandarovich.fileupload.ParseException;
 import com.sandarovich.model.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +36,8 @@ public class PurchaseUploadService implements UploadService {
     }
 
     @Override
-    public void uploadFiletoDB() throws JsonParseException {
+    public void uploadFileToDB() {
         parseFile();
-
         Purchase purchase = purchaseDao.save();
 
         for (PurchaseProxy item : purchaseProxy) {
@@ -63,16 +59,16 @@ public class PurchaseUploadService implements UploadService {
 
     }
 
-    private void parseFile() throws JsonParseException {
-        try {
+    private void parseFile() {
+//        try {
             JsonObject jsonObject = jsonFile.asJsonObject();
             JsonArray data = jsonObject.get(ROOT_JSON_KEY).getAsJsonArray();
             Type listType = new TypeToken<ArrayList<PurchaseProxy>>() {
             }.getType();
             this.purchaseProxy = new Gson().fromJson(data, listType);
-        } catch (IOException e) {
-            logger.error("Unable to parse JSON", e);
-            throw new ParseException("Unable to parse JSON");
-        }
+//        } catch (JsonParseException e) {
+//            logger.error("Unable to parse JSON", e);
+//            throw new ParseException("Unable to parse JSON");
+//        }
     }
 }

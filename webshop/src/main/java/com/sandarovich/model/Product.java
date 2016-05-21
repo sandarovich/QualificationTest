@@ -5,7 +5,9 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Product.isExist", query = "SELECT COUNT(p) from Product as p WHERE p.name = :name"),
-        @NamedQuery(name = "Product.getByName", query = "SELECT p from Product as p WHERE p.name = :name")
+        @NamedQuery(name = "Product.getByName", query = "SELECT p from Product as p WHERE p.name = :name"),
+        @NamedQuery(name = "Product.getAll", query = "SELECT p from Product as p")
+
 })
 @Table(name = "product")
 public class Product {

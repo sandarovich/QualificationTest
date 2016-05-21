@@ -1,6 +1,7 @@
 package com.sandarovich.fileupload;
 
 
+import com.google.gson.JsonParseException;
 import com.sandarovich.model.JsonFile;
 import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
@@ -23,13 +24,13 @@ public class JsonFileValidator implements Validator {
         JsonFile jsonFile = (JsonFile) obj;
         if (isFileEmpty(errors, jsonFile)) return;
         if (isNotValidMediaType(errors, jsonFile)) return;
-        if (isNotJsonParsable(errors, jsonFile)) return;
+        if (IsNotValidJSON(errors, jsonFile)) return;
     }
 
-    private boolean isNotJsonParsable(Errors errors, JsonFile jsonFile) {
+    private boolean IsNotValidJSON(Errors errors, JsonFile jsonFile) {
         try {
             jsonFile.asJsonObject();
-        } catch (Exception e) {
+        } catch (JsonParseException e) {
             errors.rejectValue(REJECT_MESSAGE_KEY, "valid.json");
             logger.error("Unable to parse JSON. Please check it with http://jsonlint.com/", e);
             return true;

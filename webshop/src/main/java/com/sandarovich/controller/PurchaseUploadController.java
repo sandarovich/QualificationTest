@@ -1,7 +1,6 @@
 package com.sandarovich.controller;
 
 import com.sandarovich.fileupload.JsonFileValidator;
-import com.sandarovich.fileupload.ParseException;
 import com.sandarovich.model.JsonFile;
 import com.sandarovich.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +46,8 @@ public class PurchaseUploadController {
         if (result.hasErrors()) {
             return UPLOAD_PAGE;
         }
-        try {
-            uploadService.setJsonFile(jsonFile);
-            uploadService.uploadFiletoDB();
-        } catch (ParseException e) {
-            model.addAttribute("jsonFile", "Unable to parse JSON");
-            return UPLOAD_PAGE;
-        }
+        uploadService.setJsonFile(jsonFile);
+        uploadService.uploadFileToDB();
         return SUCCESS_UPLOAD_PAGE;
     }
 
