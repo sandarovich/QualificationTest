@@ -1,7 +1,7 @@
 # QualificationTest 
 ##WebShop
 
-<h1> Installation </h1>
+<h3> Installation </h3>
 
 <ol>
   <li> Download source files</li>
