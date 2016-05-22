@@ -8,8 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public class JsonFile {
+public class UploadForm {
     private static final String ENCODING = "UTF-8";
+
     private MultipartFile jsonFile;
 
     public MultipartFile getJsonFile() {
@@ -20,7 +21,7 @@ public class JsonFile {
         this.jsonFile = jsonFile;
     }
 
-    private String asText() {
+    public String getJson() {
         try {
             return IOUtils.toString(jsonFile.getInputStream(), ENCODING);
         } catch (IOException e) {
@@ -31,7 +32,7 @@ public class JsonFile {
 
     public JsonObject asJsonObject() throws JsonParseException {
         JsonParser parser = new JsonParser();
-        return parser.parse(asText()).getAsJsonObject();
+        return parser.parse(getJson()).getAsJsonObject();
 
     }
 }

@@ -3,10 +3,14 @@ package com.sandarovich.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.sandarovich.dao.ProductDao;
 import com.sandarovich.dao.PurchaseDao;
-import com.sandarovich.model.*;
+import com.sandarovich.model.Product;
+import com.sandarovich.model.Purchase;
+import com.sandarovich.model.PurchaseItem;
+import com.sandarovich.model.PurchaseProxy;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,48 +31,48 @@ public class PurchaseUploadService implements UploadService {
 
     @Autowired
     PurchaseDao purchaseDao;
-    private JsonFile jsonFile;
+    private String json;
     private List<PurchaseProxy> purchaseProxy;
 
     @Override
-    public void setJsonFile(JsonFile jsonFile) {
-        this.jsonFile = jsonFile;
+    public void setJson(String json) {
+        this.json = json;
     }
 
     @Override
     public void uploadFileToDB() {
-        parseFile();
+        parseFileFromJson(json);
         Purchase purchase = purchaseDao.save();
 
         for (PurchaseProxy item : purchaseProxy) {
             Product product = new Product();
             if (!productDao.isExist(item.getProduct())) {
                 product.setName(item.getProduct());
-                // O.K We expect that sum = total sum, so we calculate price for one item
+                // O.K We expect that sum in file = Grand total sum for one product,
+                // so we need to calculate price for one item
                 product.setPrice(item.getSum() / item.getCount());
+
                 product = productDao.save(product);
             } else {
                 product = productDao.getByName(item.getProduct());
             }
+
             PurchaseItem purchaseItem = new PurchaseItem();
             purchaseItem.setProduct(product);
             purchaseItem.setQuantity(item.getCount());
             purchaseItem.setPurchase(purchase);
+
             purchaseDao.saveItem(purchaseItem);
         }
 
     }
 
-    private void parseFile() {
-//        try {
-            JsonObject jsonObject = jsonFile.asJsonObject();
-            JsonArray data = jsonObject.get(ROOT_JSON_KEY).getAsJsonArray();
-            Type listType = new TypeToken<ArrayList<PurchaseProxy>>() {
-            }.getType();
-            this.purchaseProxy = new Gson().fromJson(data, listType);
-//        } catch (JsonParseException e) {
-//            logger.error("Unable to parse JSON", e);
-//            throw new ParseException("Unable to parse JSON");
-//        }
+    private void parseFileFromJson(String json) {
+        JsonParser parser = new JsonParser();
+        JsonObject jsonObject = parser.parse(json).getAsJsonObject();
+        JsonArray data = jsonObject.get(ROOT_JSON_KEY).getAsJsonArray();
+        Type listType = new TypeToken<ArrayList<PurchaseProxy>>() {
+        }.getType();
+        this.purchaseProxy = new Gson().fromJson(data, listType);
     }
 }

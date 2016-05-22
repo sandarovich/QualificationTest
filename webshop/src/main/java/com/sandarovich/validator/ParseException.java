@@ -1,4 +1,4 @@
-package com.sandarovich.fileupload;
+package com.sandarovich.validator;
 
 public class ParseException extends Exception {
 

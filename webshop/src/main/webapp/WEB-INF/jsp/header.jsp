@@ -11,3 +11,8 @@
         <script src="<c:url value="/js/jquery-2.2.4.min.js" />"></script>
     </head>
     <body>
+    <div class="container">
+        <div class="page-header">
+            <h3>WebShop<small> "Larek-Marek :)"</small></h3>
+        </div>
+     </div>

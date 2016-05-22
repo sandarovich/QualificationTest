@@ -1,8 +1,8 @@
 package com.sandarovich.controller;
 
-import com.sandarovich.fileupload.JsonFileValidator;
-import com.sandarovich.model.JsonFile;
+import com.sandarovich.model.UploadForm;
 import com.sandarovich.service.UploadService;
+import com.sandarovich.validator.UploadFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,35 +20,42 @@ public class PurchaseUploadController {
 
     private static final String UPLOAD_PAGE = "upload";
     private static final String SUCCESS_UPLOAD_PAGE = "successUpload";
+    private static final String REDIRECT_PATH = "redirect:upload/success";
 
     @Autowired
-    private JsonFileValidator jsonFileValidator;
+    private UploadFormValidator uploadFormValidator;
 
     @Autowired
     private UploadService uploadService;
 
     @InitBinder
     private void initBinder(WebDataBinder binder) {
-        binder.setValidator(jsonFileValidator);
+        binder.setValidator(uploadFormValidator);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String getForm(Model model) {
 
-        JsonFile jsonFile = new JsonFile();
-        model.addAttribute("jsonFile", jsonFile);
+    @RequestMapping(method = RequestMethod.GET)
+
+    public String getUploadForm(Model model) {
+        UploadForm uploadForm = new UploadForm();
+        model.addAttribute("uploadForm", uploadForm);
         return UPLOAD_PAGE;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String uploadFile(Model model, @Validated JsonFile jsonFile, BindingResult result) {
+    @RequestMapping(value = "/success", method = RequestMethod.GET)
+    public String showSuccessUpload(Model model) {
+        return SUCCESS_UPLOAD_PAGE;
+    }
 
+    @RequestMapping(method = RequestMethod.POST)
+
+    public String uploadFile(Model model, @Validated UploadForm uploadForm, BindingResult result) {
         if (result.hasErrors()) {
             return UPLOAD_PAGE;
         }
-        uploadService.setJsonFile(jsonFile);
+        uploadService.setJson(uploadForm.getJson());
         uploadService.uploadFileToDB();
-        return SUCCESS_UPLOAD_PAGE;
+        return REDIRECT_PATH;
     }
 
 }

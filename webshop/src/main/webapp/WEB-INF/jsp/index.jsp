@@ -1,9 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="header.jsp" />
         <div class="container">
-            <div class="page-header">
-                <h2>WebShop<small> "Larek-Marek :)"</small></h2>
-            </div>
+
              <div class="jumbotron">
                 <h1>Let's do it quick:</h1>
                     <p><a class="btn btn-lg btn-success" href="<c:url value="/upload" />" role="button">Upload purchase</a></p>
