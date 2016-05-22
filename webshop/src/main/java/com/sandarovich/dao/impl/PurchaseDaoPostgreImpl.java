@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -19,10 +20,11 @@ public class PurchaseDaoPostgreImpl implements PurchaseDao {
     private EntityManager em;
 
     @Override
-    public Purchase getById(long id) {
-        TypedQuery<Purchase> query = em.createNamedQuery("Purchase.getById", Purchase.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+    public List<Purchase> getByDate(Date date) {
+        TypedQuery<Purchase> query = em.createNamedQuery("Purchase.getByDate", Purchase.class);
+        List<Purchase> purchases = query.setParameter("date", date).getResultList();
+        purchases.size();
+        return purchases;
     }
 
     @Override

@@ -36,6 +36,8 @@
         <jcl.slf4j.version>1.7.12</jcl.slf4j.version>
         <slf4j-log4j12.version>1.7.5</slf4j-log4j12.version>
         <h2.version>1.4.191</h2.version>
+        <jackson-databind.version>2.6.3</jackson-databind.version>
+        <tomcat7-maven-plugin.url>http://localhost:8080/manager/text</tomcat7-maven-plugin.url>
     </properties>
 
     <dependencies>
@@ -146,6 +148,11 @@
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -167,7 +174,7 @@
                 <version>2.2</version>
                 <configuration>
                     <update>true</update>
-                    <url>http://localhost:8080/manager/text</url>
+                    <url>${tomcat7-maven-plugin.url}</url>
                     <server>TomcatServer</server>
                     <path>/webshop</path>
                     <username>${tomcat.deploy.username}</username>

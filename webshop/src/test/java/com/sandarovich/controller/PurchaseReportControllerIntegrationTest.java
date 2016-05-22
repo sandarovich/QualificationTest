@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:*applicationContextTest.xml"})
-public class ReportControllerIntegrationTest {
+public class PurchaseReportControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext context;
@@ -31,7 +31,7 @@ public class ReportControllerIntegrationTest {
 
     @Test
     public void testReportRootUrl() throws Exception {
-        this.mockMvc.perform(get("/report"))
+        mockMvc.perform(get("/report"))
                 .andExpect(status().isOk())
                 .andExpect(forwardedUrl("/WEB-INF/jsp/report.jsp"))
                 .andExpect(view().name("report"));

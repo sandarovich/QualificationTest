@@ -28,13 +28,14 @@ public class ProductDaoPostgreImpl implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        TypedQuery<Product> query = em.createNamedQuery("", Product.class);
+        TypedQuery<Product> query = em.createNamedQuery("Product.getAll", Product.class);
         return query.getResultList();
     }
 
     @Override
     public Product save(Product product) {
-        return em.merge(product);
+        em.persist(product);
+        return product;
 
     }
 

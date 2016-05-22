@@ -2,12 +2,11 @@ package com.sandarovich.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Purchase.getById", query = "SELECT p from Purchase as p WHERE p.id = :id")
+        @NamedQuery(name = "Purchase.getByDate", query = "SELECT p from Purchase as p WHERE p.purchaseDate >= :date")
 })
 @Table(name = "purchase")
 public class Purchase {
@@ -18,8 +17,8 @@ public class Purchase {
     @Column(name = "date")
     private Date purchaseDate;
 
-    @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
-    private Set<PurchaseItem> items = new HashSet<>();
+    @OneToMany(mappedBy = "purchase", fetch = FetchType.EAGER)
+    private List<PurchaseItem> items;
 
     public long getId() {
         return id;
@@ -37,11 +36,11 @@ public class Purchase {
         this.purchaseDate = purchaseDate;
     }
 
-    public Set<PurchaseItem> getItems() {
+    public List<PurchaseItem> getItems() {
         return items;
     }
 
-    public void setItems(Set<PurchaseItem> items) {
+    public void setItems(List<PurchaseItem> items) {
         this.items = items;
     }
 }

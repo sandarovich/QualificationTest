@@ -1,20 +1,14 @@
 {
   "data": [
     {
-      "product": "Icecream",
-      "count": 10,
-      "sum": 1000
+      "product": "Nuts",
+      "count": 9,
+      "sum": 18
     },
     {
-      "product": "Robot",
-      "count": 4,
-      "sum": 3600
-    },
-    {
-      "product": "Milk",
-      "count": 1,
-      "sum": 10.59
+      "product": "Pop-Corn",
+      "count": 2,
+      "sum": 50
     }
   ]
 } 
-    

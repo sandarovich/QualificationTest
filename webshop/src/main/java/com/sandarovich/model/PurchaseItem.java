@@ -3,6 +3,9 @@ package com.sandarovich.model;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "PurchaseItem.getPurchaseItem", query = "SELECT p from PurchaseItem as p JOIN FETCH p.product WHERE p.id = :id")
+})
 @Table(name = "purchase_item")
 public class PurchaseItem {
     @Id
@@ -16,7 +19,7 @@ public class PurchaseItem {
     @JoinColumn(name = "purchase_id")
     private Purchase purchase;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
